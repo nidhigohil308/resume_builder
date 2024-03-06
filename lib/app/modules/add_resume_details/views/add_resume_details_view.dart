@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../controllers/add_resume_details_controller.dart';
@@ -79,8 +80,13 @@ class AddResumeDetailsView extends GetView<AddResumeDetailsController> {
                   ),
                   TextFormField(
                     controller: addResumeDetailsController.txtPhone,
-                    decoration:
-                        const InputDecoration(labelText: 'Phone Number'),
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                    decoration: const InputDecoration(
+                      labelText: 'Phone Number',
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your phone number';
